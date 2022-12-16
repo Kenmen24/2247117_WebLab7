@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything Gaming</title>
+    <script src="angular.min.js"></script>
+    <script src="Home.js"></script>
+    <link rel="stylesheet" href="Home.css">
+</head>
+<body ng-app="Packages">
+    <div ng-controller="Packagesctrl">
+        <header>
+            <div class="navbar">
+                <ul>
+                    <li><a href="Hello.html">Home</a></li>
+                </ul>
+            </div>
+        </header>
+        <br>
+        <div class="topbox">
+            Rows to display:  <input type="number" step="1" min="0" max="10" ng-model="rowlimit"/><br><br>
+            Search:  <input type="text" placeholder="Search for item" ng-model="search"><br><br>
+            Enter the number of characters:  <input type="text" placeholder="Enter no. of characters" ng-model="limit"><br><br>
+        </div>
+        <table>
+            <tr>
+                <th>Name
+                    <br>
+                    <input type="text" ng-model="search.name" placeholder="Search name">
+                </th>
+                <th>Date of Release
+                    <br>
+                    <input type="text" ng-model="search.dor" placeholder="Search date">
+                </th>
+                <th>IGN Rating
+                    <br>
+                    <input type="text" ng-model="search.rating" placeholder="Search rating">
+                </th>
+                <th>Price(Rs)
+                    <br>
+                    <input type="text" ng-model="search.price" placeholder="Search Price">
+                </th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="htl in items|limitTo:rowlimit|filter:search">
+                    <td>{{htl.name|namefilter:limit}}</td>
+                    <td>{{htl.dor|date:"dd/MM/yyyy"}}</td>
+                    <td>{{htl.rating|lowercase}}</td>
+                    <td>&#8377;{{htl.price|number:0}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
